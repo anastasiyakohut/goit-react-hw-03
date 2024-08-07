@@ -1,9 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useId } from 'react';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid'
-import css from './ContactForm.module.css'
+import css from './ContactForm.module.css';
 
-export default function ContactForm({addContact}) {
+export default function ContactForm({ addContact }) {
+
+    const idName = useId();
+    const idNumber = useId();
 
     const userSchema = Yup.object().shape({
         name: Yup.string()
@@ -30,8 +34,8 @@ export default function ContactForm({addContact}) {
         >
             <Form className={css.form}>
                 <div className={css.formGroup}>
-                    <label htmlFor="name">Name</label>
-                    <Field className={css.input} type="text" name="name" />
+                    <label htmlFor={`name-${idName}`}>Name</label>
+                    <Field className={css.input} type="text" name="name" id={`name-${idName}`}/>
                     <ErrorMessage
                         className={css.error}
                         name="name"
@@ -40,8 +44,8 @@ export default function ContactForm({addContact}) {
                 </div>
                 
                 <div className={css.formGroup}>
-                    <label htmlFor="number">Number</label>
-                    <Field className={css.input} type="tel" name="number" />
+                    <label htmlFor={`number-${idNumber}`}>Number</label>
+                    <Field className={css.input} type="tel" name="number" id={`number-${idNumber}`}/>
                     <ErrorMessage
                         className={css.error}
                         name="number"
